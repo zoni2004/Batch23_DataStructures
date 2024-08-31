@@ -4,6 +4,17 @@
 
 using namespace std;
 
+void commonFrnds(bool matrix[5][5]){
+     for(int i=0; i<5; i++){
+        for(int k=i+1; k<5; k++){
+            for(int j=0; j<5; j++){
+                 if((matrix[i][j] == true) && (matrix[i][j] == matrix[k][j])){
+                cout<<"\n"<<i<<" and "<<k<<" have a common friend "<< j;
+            }
+            }
+        }
+    }
+}
 int main() {
     bool arr[5][5]= {
         {false, true, false, true, true}, 
@@ -27,15 +38,7 @@ int main() {
     }
     cout<<"}";
     
-    for(int i=0; i<5; i++){
-        for(int k=i+1; k<5; k++){
-            for(int j=0; j<5; j++){
-                 if((arr[i][j] == true) && (arr[i][j] == arr[k][j])){
-                cout<<"\n"<<i<<" and "<<k<<" have a common friend "<< j;
-            }
-            }
-        }
-    }
-
+    commonFrnds(arr);
+    
     return 0;
 }
