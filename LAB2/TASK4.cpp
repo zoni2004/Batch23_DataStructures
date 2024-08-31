@@ -1,3 +1,4 @@
+
 /*You are tasked with developing a program to manage and display the Grade Point Average (GPA) for the
 core courses offered in the first semester of four departments: Software Engineering (SE), Artificial Intelligence
 (AI), Computer Science (CS), and Data Science (DS). Each department offers a distinct number of core courses
@@ -10,18 +11,19 @@ I would make use of jagged array for  aset number of rows and a different number
 using namespace std;
 
 int main(){
-    int **coreCourses = new int*[4];
-    int size[4];
-    for(int i=0; i<4; i++){
-        cout<<"\nEnter the number of columns of row "<<i+1<< " ";
-        cin>>size[i];
-        coreCourses[i] = new int[size[i]];
+    const int numDepartments = 4;
+    int numCourses[numDepartments] = {3, 4, 2, 1};
+    
+    int** coreCourses = new int*[numDepartments];
+
+    for (int i = 0; i < numDepartments; ++i) {
+        coreCourses[i] = new int[numCourses[i]];
     }
     
     //taking user input
     for(int i=0; i<4; i++){
-        for(int j=0; j<size[i]; j++){
-            cout<<"\nEnter element for row "<<i+1<<" and column "<<j+1<<" ";
+        for(int j=0; j<numCourses[i]; j++){
+            cout<<"\nEnter GPA for row "<<i+1<<" and column "<<j+1<<" ";
             cin>>coreCourses[i][j];
         }
     }
@@ -30,12 +32,18 @@ int main(){
     cout<<"\nPrinting the GPA of core courses";
     cout<<"{\n";
     for(int i=0; i<4; i++){
-        for(int j=0; j<size[i]; j++){
+        for(int j=0; j<numCourses[i]; j++){
             cout<<coreCourses[i][j]<<"\t";
         }
     cout<<"\n";
     }
     cout<<"}\n";
+    
+    //deallocating memory
+    for (int i = 0; i < numDepartments; ++i) {
+        delete[] coreCourses[i];
+    }
+    delete[] coreCourses;
     
 return 0;
 }
