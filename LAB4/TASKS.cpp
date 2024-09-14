@@ -1,3 +1,4 @@
+
 #include<iostream>
 using namespace std;
 
@@ -120,6 +121,40 @@ int BinarySearch(int arr[], int size, int target){
     return -1;
 }
 
+int InterpolationSearch(int arr[], int size, int target){
+    bool sorted = true;
+    if(sorted == false){
+        bubbleSort(arr,size);
+        sorted = true;
+    }
+    else{
+        bool isFound = false;
+        int low = 0;
+        int high = size-1;
+        while(low <= high && target>=arr[low] && target <= arr[high]){
+            if(low == high){
+                if(arr[low] == target){
+                    return low;
+                }
+            return -1;
+            }
+            int pos = (low + (((target-arr[low])*(high-low))/(arr[high]-arr[low])));
+            if(arr[pos] == target){
+                return pos;
+            }
+            if (arr[pos] < target) {
+                 low = pos + 1;
+            }
+            else if(arr[pos] > target){
+                 high = pos - 1;
+            }  
+    }
+}
+
+    return -1;
+}
+
+
 void printArr(int arr[], int size){
 	cout<<"{";
 	for(int i=0; i<size; i++){
@@ -162,5 +197,13 @@ int main(){
 	}
 	else{
 		cout<<"\nThe index is: \n"<<y;
+	}
+	cout<<"\nInterlopation Search\n";
+	int z = InterpolationSearch(arr,6,13);
+	if(z == -1){
+		cout<<"\nTarget not found";
+	}
+	else{
+		cout<<"\nThe index is: \n"<<z;
 	}
 }
